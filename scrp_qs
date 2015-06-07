@@ -1,0 +1,29 @@
+#! /bin/bash
+
+ci quick_sort.c
+
+co quick_sort.c
+
+gcc -o quick_sort quick_sort.c
+
+func_rm()
+{
+	rm -rf quick_sort.c
+}
+
+func_lout()
+{
+	co -l quick_sort.c
+}
+
+if( ./quick_sort )
+then 
+	read
+	func_rm
+	func_lout
+else
+	echo "make it correct"
+	func_rm
+	func_lout
+fi
+

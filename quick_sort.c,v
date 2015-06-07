@@ -1,0 +1,198 @@
+head	1.3;
+access;
+symbols;
+locks
+	vishal:1.3; strict;
+comment	@ * @;
+
+
+1.3
+date	2015.05.01.07.47.07;	author vishal;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2015.05.01.07.33.45;	author vishal;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2015.04.28.15.18.30;	author vishal;	state Exp;
+branches;
+next	;
+
+
+desc
+@Sorting the array using quick sort technique and recursive function.
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@#include<stdio.h>
+#include<stdlib.h>
+
+int *ent_num();
+int *quick_sort(int *, int , int);
+int quick_display(int *);
+
+int main()
+{
+	int *quick_arr, i;
+	quick_arr = ent_num();
+	quick_arr = quick_sort(quick_arr, 0, 7);
+	quick_display(quick_arr);
+	return 0;
+}
+
+int *ent_num()
+{
+	int *quick_arr, i;
+	quick_arr = (int *)malloc(sizeof(int) * 20);
+	printf("Enter the array %s:-\n", __func__);
+	for(i = 0; i < 8; i++)
+	{
+		scanf("%d", &quick_arr[i]);
+	}
+	return quick_arr;
+}
+
+int *quick_sort(int *quick_arr, int init, int last)
+{
+
+	int lar_ind, smal_ind, pvt, temp, first;
+	lar_ind = init;
+	smal_ind = last;
+	pvt = init;
+	first = 0;
+	
+	if(init >= last)
+	{
+		return quick_sort;	
+	}
+	while(lar_ind < smal_ind)
+	{
+		if(first > 0)
+		{
+			lar_ind = 0;
+			smal_ind = last;
+		}
+		first++;
+		while(*(quick_arr + pvt) >= *(quick_arr + lar_ind) && lar_ind <= last)
+		{
+			lar_ind++;
+		}
+		while(*(quick_arr + pvt) < *(quick_arr + smal_ind) && smal_ind >= init)
+		{
+			smal_ind--;
+		}		
+		if(lar_ind < smal_ind)
+		{
+			temp = *(quick_arr + lar_ind );
+			*(quick_arr + lar_ind ) = *(quick_arr + smal_ind );
+			*(quick_arr + smal_ind) = temp;	
+		}
+	}
+	
+	if(*(quick_arr + smal_ind) < *(quick_arr + pvt))
+	{
+	temp = *(quick_arr + smal_ind );	
+	*(quick_arr + smal_ind) = *(quick_arr + pvt);
+	*(quick_arr + pvt) = temp;	
+	}
+	else if(init < smal_ind)
+	{
+		smal_ind--;
+	}
+	quick_sort(quick_arr, init, smal_ind);
+	quick_sort(quick_arr, smal_ind + 1, last);
+	return quick_arr;
+}
+
+int quick_display(int *quick_arr)
+{
+	int i;
+	printf("Array after the Quick Sort \n");
+	for(i = 0; i < 8; i++)
+	{
+		printf("%d\n", quick_arr[i]);
+	}
+
+	return 0;	
+}
+@
+
+
+1.2
+log
+@Change the pivot index, make it constant with default value init.
+Also change the temination condition of the recursion.
+That is if last is less then or equal to init function will return value.
+@
+text
+@d89 1
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d5 2
+a7 1
+int *quick_sort(int *, int , int);
+d13 1
+a13 4
+	for(i = 0; i < 8; i++)
+	{
+		printf("%d", quick_arr[i]);
+	}
+d31 1
+a32 2
+	printf("Please enter any number between %d-%d\n", init, last);
+	scanf("%d", &pvt);
+d35 1
+d37 2
+a38 5
+	if(pvt == init)
+	{
+		pvt++;
+	}
+	if(pvt == last)
+d40 1
+a40 1
+		pvt--;
+d50 1
+a50 3
+		printf("first == %d\n", first);
+		sleep(1);
+		while(*(quick_arr + pvt) >= *(quick_arr + lar_ind))
+a52 1
+			printf("%d________\n", lar_ind);
+d54 1
+a54 2
+		sleep(1);
+		while(*(quick_arr + pvt) < *(quick_arr + smal_ind))
+a56 2
+			printf("%d!!!!!!!!!!\n", smal_ind);
+			sleep(1);
+d60 3
+a62 3
+			temp = *(quick_arr + lar_ind - 1);
+			*(quick_arr + lar_ind - 1) = *(quick_arr + smal_ind - 1);
+			*(quick_arr + smal_ind - 1) = temp;	
+d65 5
+a69 2
+	temp = *(quick_arr + smal_ind - 1);
+	*(quick_arr + smal_ind - 1) = *(quick_arr + pvt);
+d71 7
+a77 3
+	
+	quick_sort(quick_arr, 0, smal_ind - 1);
+	quick_sort(quick_arr, smal_ind , last);
+d79 11
+@
